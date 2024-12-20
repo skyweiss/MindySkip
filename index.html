@@ -1,40 +1,46 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Will Mindy skip work?</title>
+		<link rel="stylesheet" href="style.css">
 	</head>
 	
-	<body style="background-color:#444444; color:white">
-		<h3 id="route_target">Route target not set</h3>
-		
-		<h3 id="currently_over"></h3>
-		
-		<h3 id="sum"></h3>
-		
-		<h2 id="success"></h2>
-		
-		<p>
-			<button onclick="addLoad(1)">+1 extra load</button>
-			<button onclick="removeLoad(1)">-1 skipped load</button>
-		</p>
-		<p>
-			<button onclick="addLoad(2)">No Cheese reset (+2)</button>
-			<button onclick="addLoad(3)">Reset before reloading Creek (+3)</button>
-		</p>
-		<p>
-			<button onclick="addLoad(4)">Reset after reloading Creek (+4)</button>
-			<button onclick="addLoad(5)">Reset to Depression end-level (+5)</button>
-		</p>
-		<br />
-		<p>
-			<button onclick="reset()">Reboot (reset count)</button>
-			<button onclick="editRouteTarget()">Edit route target</button>
-		</p>
-		<p>
-			Background: 
-			<button onclick="bg('black')">Black</button>
-			<button onclick="bg('#444444')">Gray</button>
-			<button onclick="bg('white')">White</button>
-		</p>
+	<body>
+		<main>
+			<div id="text-container">
+				<h3 id="route_target">Route target not set</h3>
+
+				<h3 id="currently_over"></h3>
+				
+				<h3 id="sum"></h3>
+				
+				<h2 id="success"></h2>
+			</div>
+			
+				<div id="button-container">
+					<button class="big" onclick="removeLoad(1)">-1 skipped load</button>
+					<button class="big" onclick="addLoad(1)">+1 extra load</button>
+					<br>
+					<button onclick="addLoad(2)">No Cheese reset (+2)</button>
+					<button onclick="addLoad(3)">Reset before reloading Creek (+3)</button>
+					<br>
+					<button onclick="addLoad(4)">Reset after reloading Creek (+4)</button>
+					<button onclick="addLoad(5)">Reset to Depression end-level (+5)</button>
+					<br>
+					<button class="warn" onclick="reset()">Reboot (reset count)</button>
+					<button class="secondary" onclick="editRouteTarget()">Edit route target</button>
+					<br>
+				</div>
+				<p>Background:</p>
+				<div id="button-container">
+					<button onclick="bg('black')">Black</button>
+					<button onclick="bg('#212121')">Gray</button>
+					<button onclick="bg('white')">White</button>
+				</div>
+			</p>
+		</main>
 		
 		<script>
 			let routeTarget = -1;
@@ -96,11 +102,11 @@
 					}
 					
 					if (sum % 4 == 0) {
-						elementSuccess.innerHTML = "Mindy skip will not work";
+						elementSuccess.innerHTML = "❌ Mindy skip will not work";
 						elementSuccess.style.color = 'red';
 					}
 					else {
-						elementSuccess.innerHTML = "Mindy skip will work";
+						elementSuccess.innerHTML = "✔️ Mindy skip will work";
 						elementSuccess.style.color = successColor;
 					}
 				}
