@@ -9,7 +9,7 @@
 	
 	<body>
 		<main>
-			<div id="text-container">
+			<div class="text-container">
 				<h3 id="route_target">Route target not set</h3>
 
 				<h3 id="currently_over"></h3>
@@ -19,7 +19,7 @@
 				<h2 id="success"></h2>
 			</div>
 			
-				<div id="button-container">
+				<div class="button-container">
 					<button class="big" onclick="removeLoad(1)">-1 skipped load</button>
 					<button class="big" onclick="addLoad(1)">+1 extra load</button>
 					<br>
@@ -34,7 +34,7 @@
 					<br>
 				</div>
 				<p>Background:</p>
-				<div id="button-container">
+				<div class="button-container">
 					<button onclick="bg('black')">Black</button>
 					<button onclick="bg('#212121')">Gray</button>
 					<button onclick="bg('white')">White</button>
@@ -102,11 +102,11 @@
 					}
 					
 					if (sum % 4 == 0) {
-						elementSuccess.innerHTML = "❌ Mindy skip will not work";
+						elementSuccess.innerHTML = "Mindy skip will not work";
 						elementSuccess.style.color = 'red';
 					}
 					else {
-						elementSuccess.innerHTML = "✔️ Mindy skip will work";
+						elementSuccess.innerHTML = "Mindy skip will work";
 						elementSuccess.style.color = successColor;
 					}
 				}
@@ -115,12 +115,16 @@
 			function bg(color) {
 				document.body.style.background = color;
 				if (color == 'white') {
-					document.body.style.color = 'black';
-					successColor = 'green';
+					document.body.style.color = 'rgba(0, 0, 0, 0.9)';
+					document.querySelector('.text-container').style.background = 'rgba(0, 0, 0, 0.1)';
+					successColor = '#1faa1f';
+					document.querySelector('.secondary').style.border = '4px solid rgba(0, 0, 0, 0.9)';
 				}
 				else {
+					document.querySelector('.text-container').style.background = 'rgba(255, 255, 255, 0.1)';
 					document.body.style.color = 'white';
-					successColor = 'lime';
+					successColor = '#53f753';
+					document.querySelector('.secondary').style.border = '4px solid white';
 				}
 				
 				updateSum();

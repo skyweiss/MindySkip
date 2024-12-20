@@ -1,7 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
+
 body {
     background-color: #212121;
     color: rgba(255, 255, 255, 0.9);
-    font-family: Roboto, Arial, Verdana, sans-serif;
+    font-family: Geist, Roboto, Arial, Verdana, sans-serif;
 }
 
 button {
@@ -15,6 +17,7 @@ button {
     margin-right: 0.7rem;
     box-sizing: border-box;
     width: calc(50% - 0.7rem);
+    font-family: inherit;
 
     &.big {
         font-size: 1.2rem;
@@ -34,14 +37,18 @@ button {
 .secondary {
     background-color: transparent;
     border: 4px solid white;
-    color: white;
+    color: inherit;
+
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
 }
 
 main {
     margin: 0 auto;
     width: min(90%, 600px);
 }
-#button-container {
+.button-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -51,10 +58,13 @@ main {
     margin-right: 0;
   }
 
-#text-container {
-    background-color: rgba(255, 255, 255, 0.04);
-    padding: 1rem;
+.text-container {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 1rem 2rem;
     border-radius: 5px;
     margin-bottom: 2rem;
     margin-top: 2rem;
+}
+#success {
+    #53f753
 }
