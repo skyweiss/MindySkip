@@ -10,13 +10,7 @@
 	<body>
 		<main>
 			<div class="text-container">
-				<h3 id="route_target">Route target not set</h3>
-
-				<h3 id="currently_over"></h3>
-				
-				<h3 id="sum"></h3>
-				
-				<h2 id="success"></h2>
+				<h2 id="trackers">No trackers added</h2>
 			</div>
 			
 				<div class="button-container">
@@ -30,9 +24,14 @@
 					<button onclick="addLoad(5)">Reset to Depression end-level (+5)</button>
 					<br>
 					<button class="warn" onclick="reset()">Reboot (reset count)</button>
-					<button class="secondary" onclick="editRouteTarget()">Edit route target</button>
-					<br>
 				</div>
+				
+				<br>
+				<div class="button-container">
+					<button class="secondary" onclick="addTracker()">Add tracker</button>
+					<button class="secondary" onclick="removeTracker()">Remove last tracker</button>
+				</div>
+				
 				<p>Background:</p>
 				<div class="button-container">
 					<button onclick="bg('black')">Black</button>
@@ -43,75 +42,64 @@
 		</main>
 		
 		<script>
-			let routeTarget = -1;
-			let currentlyOver = 0;
-			let sum = 0;
-			let successColor = '#53f753';
+			currentlyOver = 0;
+			successColor = '#53f753';
 			
-			const elementRouteTarget = document.getElementById("route_target");
-			const elementCurrentlyOver = document.getElementById("currently_over");
-			const elementSum = document.getElementById("sum");
-			const elementSuccess = document.getElementById("success");
+			trackers = [];
 			
-			function editRouteTarget() {
-				let temp = 0;
-				if (routeTarget != -1) {
-					temp = parseInt(prompt("Enter route target:", routeTarget));
+			const elementTrackers = document.getElementById("trackers");
+			
+			function addTracker() {
+				let str = prompt("Enter tracker name:", "");
+				let target = parseInt(prompt("Enter target load count:", 0));
+				trackers.push([str, target]);
+				updateTrackers();
+			}
+			
+			function removeTracker() {
+				trackers.pop();
+				updateTrackers();
+			}
+			
+			function updateTrackers() {
+				if (trackers.length > 0) {
+					let temp = "";
+					let divSuccess = '<div style="color:' + successColor + '">';
+					let divFail = '<div style="color:red">';
+					for (let i = 0; i < trackers.length; i++) {
+						let sum = trackers[i][1] + currentlyOver;
+						if (sum % 4 == 0) {
+							temp += divFail;
+						}
+						else {
+							temp += divSuccess;
+						}
+					
+						temp += trackers[i][0] + ": ";
+						temp += sum + "</div><br />";
+					}
+					elementTrackers.innerHTML = temp;
 				}
 				else {
-					temp = parseInt(prompt("Enter route target:", 0));
-				}
-				if (temp >= 0) {
-					routeTarget = temp;
-					elementRouteTarget.innerHTML = "Route target: " + routeTarget;
-					updateSum();
+					elementTrackers.innerHTML = "No trackers added";
 				}
 			}
 			
 			function addLoad(n) {
-				if (routeTarget != -1) {
-					currentlyOver += n;
-					updateSum();
-				}
+				currentlyOver += n;
+				updateTrackers();
 			}
 			
 			function removeLoad(n) {
-				if (routeTarget != -1) {
-					currentlyOver -= n;
-					updateSum();
-				}
+				currentlyOver -= n;
+				updateTrackers();
 			}
 			
 			function reset() {
-				if (routeTarget != -1) {
-					currentlyOver = 0;
-					updateSum();
-				}
+				currentlyOver = 0;
+				updateTrackers();
 			}
-			
-			function updateSum() {
-				if (routeTarget != -1) {
-					sum = routeTarget + currentlyOver;
-					elementCurrentlyOver.innerHTML = "Currently over by: " + currentlyOver;
-					
-					if (currentlyOver >= 0) {
-						elementSum.innerHTML = routeTarget + " + " + currentlyOver + " = " + sum;
-					}
-					else {
-						elementSum.innerHTML = routeTarget + " - " + (-currentlyOver) + " = " + sum;
-					}
-					
-					if (sum % 4 == 0) {
-						elementSuccess.innerHTML = "Mindy skip will not work";
-						elementSuccess.style.color = 'red';
-					}
-					else {
-						elementSuccess.innerHTML = "Mindy skip will work";
-						elementSuccess.style.color = successColor;
-					}
-				}
-			}
-			
+						
 			function bg(color) {
 				document.body.style.background = color;
 				if (color == 'white') {
@@ -127,7 +115,7 @@
 					document.querySelector('.secondary').style.border = '4px solid white';
 				}
 				
-				updateSum();
+				updateTrackers();
 			}
 		</script>
 	</body>
